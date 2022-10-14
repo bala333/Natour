@@ -1,0 +1,54 @@
+@mixin clearpix {
+  &::after {
+    content: '';
+    clear: left;
+    display: table;
+  }
+}
+
+@mixin absCenter {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+//media query manager
+
+/*
+
+0-600px =mobile
+600-900px =tab portrait
+900-1200px =tab landscape
+[1200-1800] is where our normal styles apply
+1800+ =big screen
+
+600 = phone
+900 = tab-port
+1200 = tab-land
+1800 = big
+
+*/
+
+@mixin respond($breakpoint) {
+  @if $breakpoint==phone {
+    @media only screen and (max-width: 600px) {
+      @content;
+    }
+  }
+  @if $breakpoint==tab-port {
+    @media only screen and (max-width: 900px) {
+      @content;
+    }
+  }
+  @if $breakpoint==tab-land {
+    @media only screen and (max-width: 1200px) {
+      @content;
+    }
+  }
+  @if $breakpoint==big {
+    @media only screen and (min-width: 1800px) {
+      @content;
+    }
+  }
+}
